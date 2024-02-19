@@ -1,17 +1,12 @@
 function notificar() {
-    if (!("Notification" in window)) {
-        alert("Este navegador no soporta notificaciones de escritorio");
-        return;
-    }
-
-    if (Notification.permission === "granted") {
-        var notification = new Notification("Hola Mundo!");
-    } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission(function(permission) {
-            if (permission === "granted") {
-                var notification = new Notification("Hola Mundo!");
-            }
-        });
-    }
-
+    Push.Permission.request();
+    Push.create('ADF Convocatories', {
+        body: 'Sabadell Notifica',
+        icon: 'src/icon.png',
+        timeout: 4000,
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        onClick: function () {
+            console.log(this);
+        }
+    });    
 }
